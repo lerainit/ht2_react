@@ -21,7 +21,7 @@ color:'green',
 cardId:null,
 addCardsArr:[],
 addFavoritesArr:[],
-el:null
+
 
 
 }
@@ -34,7 +34,7 @@ async componentDidMount(){
   localStorage.setItem('products',JSON.stringify(products))
 }
 
-addtoFavorites(id){
+addtoFavorites =(id) =>{
 this.setState((current) =>{
 
 const newState = {...current}
@@ -45,7 +45,7 @@ return newState
 })
 
 }
-openModal(id){
+openModal = (id) => {
 
   this.setState({isOpenModal:true,cardId:id})
 
@@ -66,7 +66,7 @@ localStorage.setItem('addCards',JSON.stringify(newState.addCardsArr))
 }
 
 render(){
-const {text,backgroundColor,color,addCardsArr,addFavoritesArr,isOpenModal,cardId,products,el} = this.state
+const {text,backgroundColor,color,addCardsArr,addFavoritesArr,isOpenModal,cardId,products} = this.state
 
 
 return(
@@ -75,8 +75,8 @@ return(
 
 <div className='App'>
 
-<ProductPage addCards ={addCardsArr.length} addFavorites={addFavoritesArr.length}  ></ProductPage>
-{products.map(({id,name,price,art,url,addFavorites}) =><Card  id ={id}  name= {name} price ={price} art ={art} url={url} backgroundColor={addFavorites === false?'green':'blue'} addFavorites={()=>{this.addtoFavorites(id)}} openModal ={()=>{this.openModal(id)}} ></Card>)}
+<ProductPage addCards ={addCardsArr.length} addFavoritesPage={addFavoritesArr.length} products={products} openModal={this.openModal} addFavoritesFunc = {this.addtoFavorites}></ProductPage>
+
   {isOpenModal && <Modal text = {text} backgroundColor ={backgroundColor} color ={color} handleClick={()=>{this.setState({isOpenModal:false})}}  addCart ={() =>{this.addCart(cardId)}}></Modal>}
 
 
@@ -112,3 +112,4 @@ export default App;
  // <h2>Added favorites:{addFavoritesArr.length}</h2>
 //{products.map(el =><Card  id ={el.id}  name= {el.name} price ={el.price} art ={el.art} url={el.url} backgroundColor={el.addFavorites === false?'green':'blue'} addFavorites={()=>{this.addtoFavorites(el.id)}} openModal ={()=>{this.openModal(el.id)}} ></Card>)}
  // {isOpenModal && <Modal text = {text} backgroundColor ={backgroundColor} color ={color} handleClick={()=>{this.setState({isOpenModal:false})}}  addCart ={() =>{this.addCart(cardId)}}></Modal>}
+ //{products.map(({id,name,price,art,url,addFavorites}) =><Card  id ={id}  name= {name} price ={price} art ={art} url={url} backgroundColor={addFavorites === false?'green':'blue'} addFavorites={()=>{this.addtoFavorites(id)}} openModal ={()=>{this.openModal(id)}} ></Card>)}

@@ -4,7 +4,7 @@
  class Card extends PureComponent{
 
     render(){
-const {name,price,url,art,backgroundColor,addFavorites,openModal} = this.props
+const {name,price,url,art,backgroundColor,addFavoritesFunc,openModal,id} = this.props
 
         return(
             <>
@@ -14,8 +14,8 @@ const {name,price,url,art,backgroundColor,addFavorites,openModal} = this.props
                 <li><span>Price:</span>{price}</li>
                 <li><img className='image' src={url}/></li>
                 <li><span>Art</span>{art}</li>
-                <button style={{backgroundColor}}  onClick = {addFavorites}>Add to favorites</button>
-                <button onClick = {openModal}>Add cart</button>
+                <button style={{backgroundColor}}  onClick = {()=>addFavoritesFunc(id)}>Add to favorites</button>
+                <button onClick = {()=>{openModal(id)}}>Add cart</button>
             </ul>
             
             
