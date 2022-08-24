@@ -18,7 +18,7 @@ return(
 <button className='close_btn' onClick ={handleClick}>X</button>
 
 <p>{text}</p>
-<button onClick ={addCart} >Add to cart</button>
+<button className='modal_btn' onClick ={addCart} >Add to cart</button>
 </div>
 </div>
 

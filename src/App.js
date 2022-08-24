@@ -15,7 +15,7 @@ state = {
  
 products:JSON.parse(localStorage.getItem('products')),
 text:'Are  you sure you want to add this product to cart?',
-backgroundColor:'aqua',
+backgroundColor:'cadetblue',
 color:'green',
 
 cardId:null,
