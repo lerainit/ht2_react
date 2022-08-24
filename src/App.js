@@ -38,9 +38,11 @@ addtoFavorites =(id) =>{
 this.setState((current) =>{
 
 const newState = {...current}
+
 const index = current.products.findIndex(el => id ===el.id)
+if(newState.products[index].addFavorites === false){
 newState.products[index].addFavorites = true
-newState.addFavoritesArr.push(newState.products[index])
+newState.addFavoritesArr.push(newState.products[index])}
 return newState
 })
 
@@ -59,6 +61,7 @@ addCart(id){
   const index =newState.products.findIndex(el => id === el.id)
   console.log(newState.products)
   newState.addCardsArr.push(newState.products[index])
+  newState.isOpenModal=false
 localStorage.setItem('addCards',JSON.stringify(newState.addCardsArr))
   console.log(newState.addCardsArr)
   return newState
