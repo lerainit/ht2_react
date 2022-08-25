@@ -3,8 +3,9 @@ import React, {Component} from 'react';
 import Card from './productCard'
 import Modal from './Modal';
 import ProductPage from './productPage';
+import initLocalStorage from './getProducts';
 
-
+initLocalStorage()
 
 
 
@@ -19,8 +20,8 @@ backgroundColor:'cadetblue',
 color:'green',
 
 cardId:null,
-addCardsArr:[],
-addFavoritesArr:[],
+addCardsArr:JSON.parse(localStorage.getItem('addCards')),
+addFavoritesArr:JSON.parse(localStorage.getItem('addFavorites')),
 
 
 
@@ -31,8 +32,31 @@ async componentDidMount(){
   const products = await fetch('productsJSON.json').then(response => response.json())
 
 
-  localStorage.setItem('products',JSON.stringify(products))
+  if(!localStorage.getItem('products')){localStorage.setItem('products',JSON.stringify(products))}
+ 
+
+
 }
+clearAll =()=>{
+  localStorage.setItem('addCards',JSON.stringify([]))
+localStorage.setItem('addFavorites',JSON.stringify([]))
+  this.setState((current) =>{
+
+  const newState = {...current}
+
+newState.addCardsArr=[]
+newState.addFavoritesArr=[]
+return newState
+})
+let productsArr = JSON.parse(localStorage.getItem('products'))
+
+ productsArr.forEach(el => el.addFavorites = false)
+
+
+localStorage.setItem('products',JSON.stringify(productsArr))
+this.setState({products:productsArr})
+}
+
 
 addtoFavorites =(id) =>{
 this.setState((current) =>{
@@ -42,7 +66,13 @@ const newState = {...current}
 const index = current.products.findIndex(el => id ===el.id)
 if(newState.products[index].addFavorites === false){
 newState.products[index].addFavorites = true
-newState.addFavoritesArr.push(newState.products[index])}
+newState.addFavoritesArr.push(newState.products[index])
+
+localStorage.setItem('products',JSON.stringify(newState.products))
+localStorage.setItem('addFavorites',JSON.stringify(newState.addFavoritesArr))
+
+}
+
 return newState
 })
 
@@ -78,7 +108,7 @@ return(
 
 <div className='App'>
 
-<ProductPage addCards ={addCardsArr.length} addFavoritesPage={addFavoritesArr.length} products={products} openModal={this.openModal} addFavoritesFunc = {this.addtoFavorites}></ProductPage>
+<ProductPage addCards ={addCardsArr.length} addFavoritesPage={addFavoritesArr.length} products={products} openModal={this.openModal} addFavoritesFunc = {this.addtoFavorites} clearAll={this.clearAll}></ProductPage>
 
   {isOpenModal && <Modal text = {text} backgroundColor ={backgroundColor} color ={color} handleClick={()=>{this.setState({isOpenModal:false})}}  addCart ={() =>{this.addCart(cardId)}}></Modal>}
 
@@ -111,8 +141,3 @@ return(
 
 
 export default App;
-//<h2>Added cart:{addCardsArr.length}</h2>
- // <h2>Added favorites:{addFavoritesArr.length}</h2>
-//{products.map(el =><Card  id ={el.id}  name= {el.name} price ={el.price} art ={el.art} url={el.url} backgroundColor={el.addFavorites === false?'green':'blue'} addFavorites={()=>{this.addtoFavorites(el.id)}} openModal ={()=>{this.openModal(el.id)}} ></Card>)}
- // {isOpenModal && <Modal text = {text} backgroundColor ={backgroundColor} color ={color} handleClick={()=>{this.setState({isOpenModal:false})}}  addCart ={() =>{this.addCart(cardId)}}></Modal>}
- //{products.map(({id,name,price,art,url,addFavorites}) =><Card  id ={id}  name= {name} price ={price} art ={art} url={url} backgroundColor={addFavorites === false?'green':'blue'} addFavorites={()=>{this.addtoFavorites(id)}} openModal ={()=>{this.openModal(id)}} ></Card>)}

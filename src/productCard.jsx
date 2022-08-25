@@ -13,7 +13,7 @@ const {name,price,url,art,addFavoritesFunc,openModal,id,fill} = this.props
                 <li><span>Name:</span>{name}</li>
                 <li><span>Price:</span>{price}</li>
                 <li><img className='image' src={url}/></li>
-                <li><span>Art</span>{art}</li>
+                <li><span>Art:</span>{art}</li>
 
                 <svg className='svg' onClick = {()=>addFavoritesFunc(id)} version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="40.000000pt" height="26.000000pt" viewBox="0 0 1280.000000 1216.000000"
