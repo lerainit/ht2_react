@@ -1,5 +1,6 @@
  import React, {PureComponent} from 'react'
- import App from './App';
+ import App from '../../App';
+ import PropTypes from 'prop-types'
 
  class Card extends PureComponent{
 
@@ -45,5 +46,20 @@ fill={fill} stroke="none">
         )
     }
  }
+
+Card.propTypes  = {
+name:PropTypes.string,
+price:PropTypes.number,
+url:PropTypes.string,
+art:PropTypes.number,
+addFavoritesFunc:PropTypes.func,
+openModal:PropTypes.func,
+id:PropTypes.number,
+fill:PropTypes.string
+
+}
+
+
+
 
  export default Card;

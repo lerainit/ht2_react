@@ -1,8 +1,8 @@
 import './App.css';
 import React, {Component} from 'react';
-import Card from './productCard'
-import Modal from './Modal';
-import ProductPage from './productPage';
+import Card from './components/productcard/productCard'
+import Modal from './components/modal/Modal';
+import ProductPage from './components/productpage/productPage';
 import initLocalStorage from './getProducts';
 
 initLocalStorage()
@@ -15,6 +15,7 @@ state = {
  isOpenModal:false,
  
 products:JSON.parse(localStorage.getItem('products')),
+
 text:'Are  you sure you want to add this product to cart?',
 backgroundColor:'cadetblue',
 color:'green',
@@ -31,9 +32,12 @@ async componentDidMount(){
 
   const products = await fetch('productsJSON.json').then(response => response.json())
 
+if(!localStorage.getItem('products')){
+  
+    localStorage.setItem('products',JSON.stringify(products))
 
-  if(!localStorage.getItem('products')){localStorage.setItem('products',JSON.stringify(products))}
- 
+   
+ }
 
 
 }

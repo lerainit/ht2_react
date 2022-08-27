@@ -1,4 +1,6 @@
-const initLocalStorage = () =>{if(!localStorage.getItem('products')){(async() => {const products = await fetch('productsJSON.json').then(response => response.json())
+const initLocalStorage = () =>{
+  if(!localStorage.getItem('products')){
+    (async() => {const products = await fetch('productsJSON.json').then(response => response.json())
 
 
 localStorage.setItem('products',JSON.stringify(products))})()}

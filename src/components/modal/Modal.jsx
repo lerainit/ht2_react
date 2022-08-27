@@ -1,6 +1,6 @@
 import React,{PureComponent} from 'react';
-import './App.css';
-
+import '../../App.css';
+import PropTypes from 'prop-types'
 
 
 
@@ -26,5 +26,26 @@ return(
   ) 
 
 }
+
+
 }
+
+Modal.propTypes ={
+text: PropTypes.string ,
+backgroundColor:PropTypes.string ,
+color:PropTypes.string ,
+handleClick:PropTypes.func,
+addCart:PropTypes.func 
+
+}
+
+Modal.defaultProps ={
+text:'add this cart',
+backgroundColor:'lightgreen',
+color:'#000',
+
+
+}
+
+
 export default Modal
