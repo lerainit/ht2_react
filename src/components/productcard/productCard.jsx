@@ -52,13 +52,22 @@ name:PropTypes.string,
 price:PropTypes.number,
 url:PropTypes.string,
 art:PropTypes.number,
-addFavoritesFunc:PropTypes.func,
-openModal:PropTypes.func,
+addFavoritesFunc:PropTypes.func.isRequired,
+openModal:PropTypes.func.isRequired,
 id:PropTypes.number,
 fill:PropTypes.string
 
 }
+Card.defaultProps ={
 
+    name:'Product name',
+    price:0,
+    url:'',
+    art:0,
+    id:-1,
+    fill:'#fff'
+
+}
 
 
 

@@ -34,8 +34,8 @@ Modal.propTypes ={
 text: PropTypes.string ,
 backgroundColor:PropTypes.string ,
 color:PropTypes.string ,
-handleClick:PropTypes.func,
-addCart:PropTypes.func 
+handleClick:PropTypes.func.isRequired,
+addCart:PropTypes.func.isRequired 
 
 }
 
